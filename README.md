@@ -17,37 +17,24 @@ pp = pre parse
 
 ### Dividing the Contents into Blocks
 
-### Isolated vs. Dependent Node
+### Pre-divide into Small Blocks vs. Large Blocks
 
-In general, node can be categorized into the two types:
-
-#### Isolated Node -- Context-free Node
-
-Isolated Node is the things which does not need context.
-
-Like in markdown, the heading notation `#` or `##` can be the example.  
-The reason is, if we write `# Title`, it should be interpreted as `<h1>Title</h1>` without knowing the context.
-
-### Dependent Node -- Sequencial Context Node
-
-Dependent Node is the things which need context.
-
-Like in markdown, the list notation is:
+e.g. for small blocks:
 
 ```
 1. one
 2. two
 3. three
-5. four
 ```
 
-must be interpreted as:
+interprets above into three node, afterwards, concatanates and makes one upper-layer.
+
+e.g. for large blocks:
 
 ```
-<ol>
-  <li>one</li>
-  <li>two</li>
-  <li>three</li>
-  <li>four</li>
-</ol>
+1. one
+2. two
+3. three
 ```
+
+interprets above into one big node, afterwards, makes three lower-layer.
