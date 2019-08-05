@@ -5,27 +5,26 @@ import (
 	"strings"
 )
 
-type Type int
-
-const (
-	NoType Type = iota
-	HeadOne
-)
+type Type struct {
+	NET     bool // NET is the shortform of Null End Tag e.g. <br>
+	TagName string
+}
 
 type Node struct {
-	Type    Type
-	TagName string
-	Value   string
+	Type  *Type
+	Value string
 }
 
 func Parse(src string) *Node {
 	return &Node{
-		Type:    HeadOne,
-		TagName: "h1",
-		Value:   strings.TrimLeft(src, "# "),
+		Type: &Type{
+			NET:     false,
+			TagName: "h1",
+		},
+		Value: strings.TrimLeft(src, "# "),
 	}
 }
 
 func (node *Node) HTML() string {
-	return fmt.Sprintf("<%s>%s</%s>", node.TagName, node.Value, node.TagName)
+	return fmt.Sprintf("<%s>%s</%s>", node.Type.TagName, node.Value, node.Type.TagName)
 }
