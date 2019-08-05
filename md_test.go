@@ -2,7 +2,7 @@ package yz
 
 import "testing"
 
-func TestParse(t *testing.T) {
+func TestParseAndHTML(t *testing.T) {
 	errf := "input: %s, expect: %s, but have: %s\n"
 	tests := []struct {
 		Input  string
